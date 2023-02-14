@@ -1,0 +1,21 @@
+body {
+	background-color: #444;
+	color: white;
+
+}
+
+#instr {
+	font-size: 2em;
+}
+
+label, input, button {
+	font-size: 2em;
+	padding:1em 1.5em;
+	line-height:2em;
+	
+}
+
+#end-msg {
+	font-size: 2em;
+	color: lightslategrey
+}
