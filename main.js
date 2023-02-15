@@ -1,15 +1,22 @@
 // const render = require("./server.js")
 // latest ver
 /*
-Nacini da se zavrsi partija:
-1.) POBEDA X O
-2.) NERESENO fix
-3.) ISTI POTEZ X O
+Pre svakog poteza dobije se random broj.
+Na taj broj dodajes broj koji upises = broj polja koje ces da igras. 
+NPR.:
+RND = 6, unosim -2 => igrao sam na polje 4
+RND = -3, unosim 8 => 5
+9, -8 => 1
 
+Skor da se upisuje u localStorage
+
+Responsive design
+
+resDisplay se prikazuje samo na GAME OVER.
 */
 // Memox
-const p1 = {name: "X", moves: new Set([8,2])}
-const p2 = {name: "O", moves: new Set([4])}
+const p1 = {name: "X", moves: new Set([])}
+const p2 = {name: "O", moves: new Set([])}
 let curPlyr = p1;
 
 const whoPly = document.querySelector("#who-ply")
@@ -21,7 +28,7 @@ const btnRst = document.querySelector('#btn-rst')
 const winner = document.querySelector("#winner")
 const endMsg = document.querySelector('#end-msg')
 const gameOver = document.querySelector("#game-over")
-const [res1, res2, res3, res4, res5, res6, res7, res8, res9] = [...document.querySelectorAll('.res')]
+const res = [...document.querySelectorAll('.res')]
 
 // BUTTONS
 form  .addEventListener("submit", play)
@@ -38,13 +45,17 @@ function startGame (e) {
   winner.innerHTML = ''
   endMsg.innerHTML = ''
   gameOver.innerHTML = ''
+  for (let r of res) r.innerHTML = '-'
+  displayRes()
   console.log("%cNOVA PARTIJA JE ZAPOCETA!", "color:#0ff")
+  
 }
 
 function play (e) {
   // !!!!!!!!!ZAMENITI srcElement!!!!!!!!!!
   let br = e.srcElement[0].value // BROJ IZ HTML INPUTA
-  
+  // let br = e.target// BROJ IZ HTML INPUTA
+  // console.log(res, br)
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
   e.preventDefault() 
 
@@ -52,11 +63,10 @@ function play (e) {
   if (p1.moves.has(+br) || p2.moves.has(+br)) {
     if (!confirm(`To polje je vec odigrano! Izvini ${curPlyr.name}... Ali to ne sme da se radi. Diskvalifikovan si! Prihvatas li poraz?`)) return
     else {    
-      // alert(`Potez je vec odigran! Pobednik je ${curPlyr.name}`)
-      console.log(`Bravo ${curPlyr.name}! Pola poraza ti je oprosteno samim tim sto si prihvatio poraz.`)
+      winner.innerHTML = `Winner is ${switchPlayer().name}!<br>Igrac ${switchPlayer().name} je pokusao da igra na mesto ${br},<br>ali na to mesto je vec jednom igrao ${p1.moves.has(+br) ? p1.name : p2.name}.<br>Zbog toga je ${curPlyr.name} izgubio partiju.`
       alert(`Bravo ${curPlyr.name}! Pola poraza ti je oprosteno samim tim sto si prihvatio poraz.`)
 
-      endGame()
+      return endGame()
     }
   }
   curPlyr.moves.add(+br)
@@ -65,6 +75,8 @@ function play (e) {
   if (winCheck(curPlyr)) return endGame()
   if (drawCheck()) return endGame()
   switchPlayer()
+  displayRes()
+  whoPlay()
 }
 
 function winCheck(pX) {
@@ -80,28 +92,32 @@ function winCheck(pX) {
   ]
 
   if (winCombs.some(w => w.every(br => pX.moves.has(br)))) {
-    winner.innerHTML += `Winner is ${pX.name}`
+    winner.innerHTML = `Winner is ${pX.name}`
+    if (pX == p1) winner.style.color = "#88f"
+    else winner.style.color = "#f88"
     return true
   }
 }
 
 function drawCheck () {
   if (curPlyr.moves.size == 5) {
-    winner.innerHTML += "Neresena partija!"
+    winner.innerHTML = "Neresena partija!"
     return true
   }
 }
 
 function switchPlayer() {
-  curPlyr = curPlyr==p1 ? p2 : p1
-  displayRes()
+  return curPlyr = curPlyr==p1 ? p2 : p1
+}
+
+function whoPlay () {
   if (curPlyr == p1) {
     whoPly.textContent = `Na potezu je: ${curPlyr.name}`
-    instr.style.color = "#88f"
+    whoPly.style.color = "#88f"
   }
   else {
     whoPly.textContent = `Na potezu je: ${curPlyr.name}`
-    instr.style.color = "#f88"
+    whoPly.style.color = "#f88"
   }
 }
 
@@ -110,31 +126,23 @@ function endGame() {
   displayRes()
   endMsg.innerHTML += `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>
 ${p2.name} je igrao na poljima: ${[...p2.moves]}`
-  gameOver.innerHTML += "<br>======== GAME OVER ======="
+  gameOver.innerHTML += "=====>>> GAME OVER <<<====="
   btnPly.disabled=true
 }
 
 function displayRes () {
-  let res = [ [],[],[] ]
-  for (let r=0; r<3; r++) {
-    for (let k=0; k<3; k++) {
-      if (p1.moves.has(r*3+k+1)) {
-        res[r][k]=p1.name
-      } else if (p2.moves.has(r*3+k+1)) {
-        res[r][k]=p2.name
+  for (let r=0; r<9; r++) {
+    if (p1.moves.has(r+1)) {
+        res[r].innerHTML = p1.name
+      } else if (p2.moves.has(r+1)) {
+        res[r].innerHTML = p2.name
       } else {
-        res[r][k]=""
-      }
+        res[r].innerHTML = "-"
     } 
   }
-  console.group("%cMemox", "color:#8f8")
-  console.log(res[0])
-  console.log(res[1])
-  console.log(res[2])
-  console.log("---------------------------")
-  console.groupEnd()
 }
 
+// FOR TESTING
 function randomPlay () {
   let arr = [1,2,3,4,5,6,7,8,9]
   
@@ -157,4 +165,4 @@ function randomPlay () {
 
 // startGame()
 // randomPlay()
-displayRes()
+// displayRes()

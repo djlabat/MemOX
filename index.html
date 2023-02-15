@@ -9,30 +9,59 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	<style>
+		body {
+			background-color:
+			#444; color: white;
+			font-size: 1.6em;
+			margin: 100px;
+		}
+
+		label, input, button, span {
+			padding:1em 1.5em; line-height:2em;}
+
+		form {text-align: center;}
+
+		#game-over {padding-top: 2em;}
+		#end-msg {color: lightslategrey}
+		#winner {color: yellow; padding-bottom: 2em;}
+		#who-ply, #where-plyd, #winner, #end-msg, #game-over {text-align: center}
+
+		#btn-rst {margin-top: 1em;}
+
+		#reses {text-align: center;}
+	</style>
 	<div id="who-ply"></div>
 	<div id="where-plyd"></div>
 
 	<form id="form">
-		<label for=inp-play>Unesi broj polja na koje zelis da igras: </label>
+		<label for=inp-play>Unesi broj polja na koje zelis da igras: </label><br>
 		<input type="number" min="1" max="9" name="inp-play" id="inp-play" value="5">
-		<button type="submit" id="btn-ply">IGRAJ!</button>
-		<button type="reset" id="btn-rst">Nova partija</button>
+		<button type="submit" id="btn-ply" class="btn btn-success btn-lg">IGRAJ!</button><br>
+		<button type="reset" id="btn-rst" class="btn btn-warning btn-lg">Nova partija</button>
 	</form>
 
+	<div id="game-over"></div>
 	<div id="winner"></div>
 	<div id="end-msg"></div>
-	<div id="game-over"></div>
 
-	<span class="res" id="res1">1</span> 
-	<span class="res" id="res2">2</span> 
-	<span class="res" id="res3">3</span><br>
-	<span class="res" id="res4">4</span> 
-	<span class="res" id="res5">5</span> 
-	<span class="res" id="res6">6</span><br>
-	<span class="res" id="res7">7</span> 
-	<span class="res" id="res8">8</span> 
-	<span class="res" id="res9">9</span>
+	<div class="reses">
+		<div class="res" id="res1">1</div>
+		<div class="res" id="res2">2</div>
+		<div class="res" id="res3">3</div>
+	</div>
+	<div class="reses">
+		<div class="res" id="res4">4</div>
+		<div class="res" id="res5">5</div>
+		<div class="res" id="res6">6</div><br>
+	</div>
+	<div class="reses">
+		<div class="res" id="res7">7</div>
+		<div class="res" id="res8">8</div>
+		<div class="res" id="res9">9</div>
+	</div>
 	
+
 	<script type="text/javascript" src="main.js"></script>
 </body>
 </html>

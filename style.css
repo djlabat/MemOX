@@ -1,21 +1,28 @@
 body {
 	background-color: #444;
 	color: white;
-
+	font-size: 1.6em;
+	margin: 100px;
 }
 
-#instr {
-	font-size: 2em;
-}
-
-label, input, button {
-	font-size: 2em;
+label, input, button, span {
 	padding:1em 1.5em;
 	line-height:2em;
-	
 }
 
-#end-msg {
-	font-size: 2em;
-	color: lightslategrey
+form {text-align: center;}
+
+#game-over {padding-top: 2em;}
+#end-msg {color: lightslategrey}
+#winner {color: yellow; padding-bottom: 2em;}
+#who-ply, #where-plyd, #winner, #end-msg, #game-over {text-align: center}
+
+#btn-rst {margin-top: 1em;}
+
+.reses {
+	display: flex;
+	justify-content: center;
+}
+.res {
+	margin: 0.5em 1em;
 }
