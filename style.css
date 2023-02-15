@@ -2,22 +2,24 @@ body {
 	background-color: #444;
 	color: white;
 	font-size: 1.6em;
-	margin: 100px;
+	margin: 50px 250px;
 }
-
+h1 {text-align: center;}
 label, input, button, span {
-	padding:1em 1.5em;
+	padding:1em 1.1em;
+	margin:0.3em;
 	line-height:2em;
+}
+#inp-play, #btn-ply, #btn-rst {
+	width:200px
 }
 
 form {text-align: center;}
 
-#game-over {padding-top: 2em;}
+#game-over {padding-top: 1.5em;}
 #end-msg {color: lightslategrey}
-#winner {color: yellow; padding-bottom: 2em;}
+#winner {color: yellow;padding-bottom: 1.5ex;}
 #who-ply, #where-plyd, #winner, #end-msg, #game-over {text-align: center}
-
-#btn-rst {margin-top: 1em;}
 
 .reses {
 	display: flex;
@@ -25,4 +27,9 @@ form {text-align: center;}
 }
 .res {
 	margin: 0.5em 1em;
+}
+
+#inp-play {
+	background-color: rgb(99, 104, 84);
+	border-radius: 8px;
 }

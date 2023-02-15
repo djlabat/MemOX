@@ -13,6 +13,8 @@ Skor da se upisuje u localStorage
 Responsive design
 
 resDisplay se prikazuje samo na GAME OVER.
+
+mozda zameniti input-text u spinner
 */
 // Memox
 const p1 = {name: "X", moves: new Set([])}
@@ -40,7 +42,7 @@ function startGame (e) {
   p2.moves.clear()
   btnPly.disabled=false
   curPlyr = p1
-  whoPly.innerHTML = ''
+  whoPly.innerHTML = 'Na potezy je X'
   wherePlyd.innerHTML = ''
   winner.innerHTML = ''
   endMsg.innerHTML = ''
@@ -52,8 +54,7 @@ function startGame (e) {
 }
 
 function play (e) {
-  // !!!!!!!!!ZAMENITI srcElement!!!!!!!!!!
-  let br = e.target[0].value // BROJ IZ HTML INPUTA
+  let br = e.target[0].value // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
   console.log(e)
 
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
