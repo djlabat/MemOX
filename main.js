@@ -53,9 +53,9 @@ function startGame (e) {
 
 function play (e) {
   // !!!!!!!!!ZAMENITI srcElement!!!!!!!!!!
-  let br = e.srcElement[0].value // BROJ IZ HTML INPUTA
-  // let br = e.target// BROJ IZ HTML INPUTA
-  // console.log(res, br)
+  let br = e.target[0].value // BROJ IZ HTML INPUTA
+  console.log(e)
+
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
   e.preventDefault() 
 
