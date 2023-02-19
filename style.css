@@ -15,31 +15,41 @@ header {
 main {
 	display: flex;
 	flex-flow: column;
-	background-color: #da411366;
+	background-color: #ff00e94a;
 	text-align: center;
 }
 footer {
 	display: flex;
 	flex-flow: column;
-	background-color: #6e424266;
+	background-color: #ff00e94a;
 }
 
 
-label, input, button, span {
+input, button, span {
 	padding:1em 1.1em;
 	margin:0.3em;
 	line-height:2em;
 }
+#explain, #where-plyd {text-align: center;}
 
 .reses {
 	display: flex;
 	justify-content: center;
 }
-.res {
-	margin: 0.5em 1em;
+.res {margin: 0.5em 1em;}
+#cur-scr {
+	text-align: right;
+	margin-right: 20%;
 }
-
 #inp-play {
 	background-color: rgb(99, 104, 84);
 	border-radius: 8px;
 }
+
+#tab-res {
+	width: 9em;
+	height:8em;
+	margin: 0 auto;
+}
+
+.res {text-align: center}

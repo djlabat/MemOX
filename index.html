@@ -15,47 +15,53 @@
 			<header class="col">
 				<h1>MemOX</h1>
 				<details>
-					<summary>❔ Sta je Memox i kako se igra</summary>
-					<p>Rec MemOX je nastala od spajanja raci "memotija" i poznate igre XO (iks-oks).</p>
-					<p></p>
+					<summary>Sta je "Memox" ❔</summary>
+					<p>Rec MemOX je nastala od spajanja raci "memorija" i naziva poznate igre XO (iks-oks).</p>
 				</details>
+				<details>
+					<summary>Kako se igra ❔</summary>
+					<p>Polja na koja igras su oznacena brojevima od 1 do 9.
+						Polje na koje zelis da igras MORAS DA UPAMTIS i da uneses broj polja."`</p>
+					</details>
 				<button type="reset" id="btn-rst" class="btn btn-warning btn-lg">Nova partija</button><br>
-
 			</header>
 
 			<main class="col">
 				<div id="who-ply"></div>
-				<div id="where-plyd"></div>
 			
 				<form id="form">
 					<p id="guide">Pritisni dugme "Nova partija"</p><br>
+					<label for="inp-play">...pamtim:</label><br>
 					<input type="number" min="1" max="9" name="inp-play" id="inp-play" value="5" disabled required onfocus="this.select();"><br>
-					<button type="submit" id="btn-ply" class="btn btn-success btn-lg" disabled>IGRAJ!</button><br>
+					<button type="submit" id="btn-ply" class="btn btn-success btn-lg" disabled>SLEDECI!</button><br>
 				</form>
 			</main>
 
 			<footer class="col">
+				<div id="where-plyd"></div>
 				<div id="explain"></div>
+				
+				<table id="tab-res">
+					<tr class="row-res">
+						<td class="res" id="res1">1</td>
+						<td class="res" id="res2">2</td>
+						<td class="res" id="res3">3</td>
+					</tr>
+					<tr class="row-res">
+						<td class="res" id="res4">4</td>
+						<td class="res" id="res5">5</td>
+						<td class="res" id="res6">6</td><br>
+					</tr>
+					<tr class="row-res">
+						<td class="res" id="res7">7</td>
+						<td class="res" id="res8">8</td>
+						<td class="res" id="res9">9</td>
+					</tr>
+				</table>
+
 				<div id="cur-scr"></div>
 				<div id="tot-scr"></div>
 
-				<table id="tab-res">
-					<tr class="row-res">
-						<td class="res" id="res1"></td>
-						<td class="res" id="res2"></td>
-						<td class="res" id="res3"></td>
-					</tr>
-					<tr class="row-res">
-						<td class="res" id="res4"></td>
-						<td class="res" id="res5"></td>
-						<td class="res" id="res6"></td><br>
-					</tr>
-					<tr class="row-res">
-						<td class="res" id="res7"></td>
-						<td class="res" id="res8"></td>
-						<td class="res" id="res9"></td>
-					</tr>
-				</table>
 				<button type="button" id="btn-rst-scr" class="btn btn-secondary btn-lg">Reset rezultata</button>
 			</footer>
 

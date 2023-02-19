@@ -16,6 +16,7 @@ const players = [p1, p2]
 const whoPly = document.querySelector("#who-ply")
 const wherePlyd = document.querySelector("#where-plyd")
 const form = document.querySelector('#form')
+const guide = document.querySelector('#guide')
 const inpPly = document.querySelector('#inp-play')
 const btnPly = document.querySelector('#btn-ply')
 const btnRst = document.querySelector('#btn-rst')
@@ -37,9 +38,11 @@ function startGame (e) {
   p2.moves.clear()
   btnPly.disabled = false
   btnPly.style.backgroundColor = "green"
-  btnPly.innerHTML ="IGRAJ!"
+  btnPly.innerHTML ="SLEDECI!"
   inpPly.disabled = false
   inpPly.value = 5
+  guide.innerHTML = ''
+  
   players.reverse()
   mainHTML.style.backgroundColor = players[0].color + '6'
   whoPly.style.color = players[0].color
@@ -47,16 +50,16 @@ function startGame (e) {
   wherePlyd.innerHTML = ''
   explain.innerHTML = ''
   curScr.innerHTML = ''
-  for (let r of res) {
-    r.innerHTML = '-'
-    r.style.color = "white"
+  for (let r in res) {
+    res[r].innerHTML = r- -1
+    res[r].style.color = "#666"
   }
-  displayRes() 
+  // displayRes() 
 }
 
 function play (e) {
   let br = e.target[0].value // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
-
+  guide.innerHTML = ""
 
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
   e.preventDefault() 
@@ -65,12 +68,12 @@ function play (e) {
   if (p1.moves.has(+br) || p2.moves.has(+br)) {
     btnPly.style.backgroundColor = players[1].color
     btnPly.innerHTML = `Pobedjuje ${players[1].name}!`
-    explain.innerHTML = `${players[0].name[0]} gazi ${p1.moves.has(+br) ? p1.name[0] : p2.name[0]} na polju ${br}. ${players[0].name} gubi partiju.`
-    players[0].moves.add(+br)
-    endGame()
+    explain.innerHTML = `😕 "${players[0].name[0]}" gazi "${p1.moves.has(+br) ? p1.name[0] : p2.name[0]}" na polju ${br}! <br> ❌ Zabranjeno gazenje.<br> 😟 ${players[0].name} gubi partiju.`
+    players[0].moves.add(br+"!")
+    endGame(br)
   }
   players[0].moves.add(+br)
-  wherePlyd.innerHTML = `${players[0].name} je igrao na polje ${br}`
+  wherePlyd.innerHTML = `Poslednji potez je ${players[0].name} → ${br}`
 
   if (winCheck(players[0])) return endGame()
   if (drawCheck()) return endGame()
@@ -125,7 +128,7 @@ function drawCheck () {
 // }
 
 
-function endGame() {
+function endGame(br) {
   displayRes()
   curScr.innerHTML = `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>
 ${p2.name} je igrao na poljima: ${[...p2.moves]}`
@@ -142,7 +145,7 @@ function displayRes () {
         res[r].style.color = p2.color
         res[r].innerHTML = p2.name[0]
       } else {
-        res[r].innerHTML = "-"
+        res[r].innerHTML = r - -1
     } 
   }
 }
