@@ -1,3 +1,4 @@
-node_modules/
-Local storage.lnk
-Node.lnk
+package-lock.json
+package.json
+server.js
+MemoxOLD.lnk

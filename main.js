@@ -1,25 +1,17 @@
-// const render = require("./server.js")
-// latest ver
+// IDEJA: DRUGACIJE SAM MOGAO DA ORAGANIZUJEM PLEYERE:
+// const players = [p1, p2] // da players[0] bude uvek current, a players[1] je drugi
+// ako dreba da ih swichujem => players.reverse()
+
 /*
-Pre svakog poteza dobije se random broj.
-Na taj broj dodajes broj koji upises = broj polja koje ces da igras. 
-NPR.:
-RND = 6, unosim -2 => igrao sam na polje 4
-RND = -3, unosim 8 => 5
-9, -8 => 1
-
 Skor da se upisuje u localStorage
+Responsive design BS5
+resDisplay se prikazuje samo na GAME OVER.*/
 
-Responsive design
-
-resDisplay se prikazuje samo na GAME OVER.
-
-mozda zameniti input-text u spinner
-*/
-// Memox
-const p1 = {name: "X", moves: new Set([])}
-const p2 = {name: "O", moves: new Set([])}
-let curPlyr = p1;
+// MemOX
+const p1 = {name: "Teodor", moves: new Set([]), color: "#0ff"}
+const p2 = {name: "Lena", moves: new Set([]), color: "#f88"}
+const players = [p1, p2]
+// let curPlyr = p1;
 
 const whoPly = document.querySelector("#who-ply")
 const wherePlyd = document.querySelector("#where-plyd")
@@ -28,9 +20,11 @@ const inpPly = document.querySelector('#inp-play')
 const btnPly = document.querySelector('#btn-ply')
 const btnRst = document.querySelector('#btn-rst')
 const winner = document.querySelector("#winner")
-const endMsg = document.querySelector('#end-msg')
+const explain = document.querySelector("#explain")
+const curScr = document.querySelector("#cur-scr")
 const gameOver = document.querySelector("#game-over")
 const res = [...document.querySelectorAll('.res')]
+const mainHTML = document.querySelector('main')
 
 // BUTTONS
 form  .addEventListener("submit", play)
@@ -38,46 +32,56 @@ btnRst.addEventListener("click", startGame)
 
 function startGame (e) {
   // e.preventDefault()
+
   p1.moves.clear()
   p2.moves.clear()
-  btnPly.disabled=false
-  curPlyr = p1
-  whoPly.innerHTML = 'Na potezy je X'
+  btnPly.disabled = false
+  btnPly.style.backgroundColor = "green"
+  btnPly.innerHTML ="IGRAJ!"
+  inpPly.disabled = false
+  inpPly.value = 5
+  players.reverse()
+  mainHTML.style.backgroundColor = players[0].color + '6'
+  whoPly.style.color = players[0].color
+  whoPly.innerHTML = `Igru pocinje ${players[0].name}`
   wherePlyd.innerHTML = ''
-  winner.innerHTML = ''
-  endMsg.innerHTML = ''
-  gameOver.innerHTML = ''
-  for (let r of res) r.innerHTML = '-'
-  displayRes()
-  console.log("%cNOVA PARTIJA JE ZAPOCETA!", "color:#0ff")
-  
+  explain.innerHTML = ''
+  curScr.innerHTML = ''
+  for (let r of res) {
+    r.innerHTML = '-'
+    r.style.color = "white"
+  }
+  displayRes() 
 }
 
 function play (e) {
   let br = e.target[0].value // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
-  console.log(e)
+
 
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
   e.preventDefault() 
 
-  // PROVERA DA LI JE DUPLIRAN POTEZ
+  // DOUBLE PLAY CHECK
   if (p1.moves.has(+br) || p2.moves.has(+br)) {
-    if (!confirm(`To polje je vec odigrano! Izvini ${curPlyr.name}... Ali to ne sme da se radi. Diskvalifikovan si! Prihvatas li poraz?`)) return
-    else {    
-      winner.innerHTML = `Winner is ${switchPlayer().name}!<br>Igrac ${switchPlayer().name} je pokusao da igra na mesto ${br},<br>ali na to mesto je vec jednom igrao ${p1.moves.has(+br) ? p1.name : p2.name}.<br>Zbog toga je ${curPlyr.name} izgubio partiju.`
-      alert(`Bravo ${curPlyr.name}! Pola poraza ti je oprosteno samim tim sto si prihvatio poraz.`)
-
-      return endGame()
-    }
+    btnPly.style.backgroundColor = players[1].color
+    btnPly.innerHTML = `Pobedjuje ${players[1].name}!`
+    explain.innerHTML = `${players[0].name[0]} gazi ${p1.moves.has(+br) ? p1.name[0] : p2.name[0]} na polju ${br}. ${players[0].name} gubi partiju.`
+    players[0].moves.add(+br)
+    endGame()
   }
-  curPlyr.moves.add(+br)
-  wherePlyd.innerHTML = `${curPlyr.name} je igrao na polje ${br}`
+  players[0].moves.add(+br)
+  wherePlyd.innerHTML = `${players[0].name} je igrao na polje ${br}`
 
-  if (winCheck(curPlyr)) return endGame()
+  if (winCheck(players[0])) return endGame()
   if (drawCheck()) return endGame()
-  switchPlayer()
-  displayRes()
-  whoPlay()
+  
+  // displayRes()
+
+  mainHTML.style.backgroundColor = players[1].color + '6'
+  whoPly.style.color = players[1].color
+  whoPly.innerHTML = `Na potezu je ${players[1].name}`
+  
+  players.reverse()
 }
 
 function winCheck(pX) {
@@ -93,55 +97,63 @@ function winCheck(pX) {
   ]
 
   if (winCombs.some(w => w.every(br => pX.moves.has(br)))) {
-    winner.innerHTML = `Winner is ${pX.name}`
-    if (pX == p1) winner.style.color = "#88f"
-    else winner.style.color = "#f88"
+    btnPly.style.backgroundColor = pX.color  
+    btnPly.innerHTML = `POBEDJUJE ${pX.name}`
+    if (pX == p1) btnPly.style.backgroundColor = p1.color
+    else btnPly.style.backgroundColor = p2.color
     return true
   }
 }
 
 function drawCheck () {
-  if (curPlyr.moves.size == 5) {
-    winner.innerHTML = "Neresena partija!"
+  if (players[0].moves.size == 5) {
+    btnPly.style.backgroundColor = 'orange'  
+    btnPly.innerHTML = "NERESENO"
     return true
   }
 }
 
-function switchPlayer() {
-  return curPlyr = curPlyr==p1 ? p2 : p1
-}
-
-function whoPlay () {
-  if (curPlyr == p1) {
-    whoPly.textContent = `Na potezu je: ${curPlyr.name}`
-    whoPly.style.color = "#88f"
-  }
-  else {
-    whoPly.textContent = `Na potezu je: ${curPlyr.name}`
-    whoPly.style.color = "#f88"
-  }
-}
+// function whoPlay () {
+//   if (players[0] == p1) {
+//     whoPly.style.color = players[1].color
+//     whoPly.innerHTML = `Na potezu je ${players[1].name}`
+//   }
+//   else {
+//     whoPly.style.color = players[0].color
+//     whoPly.innerHTML = `Na potezu je ${players[0].name}`
+//   }
+// }
 
 
 function endGame() {
   displayRes()
-  endMsg.innerHTML += `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>
+  curScr.innerHTML = `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>
 ${p2.name} je igrao na poljima: ${[...p2.moves]}`
-  gameOver.innerHTML += "=====>>> GAME OVER <<<====="
   btnPly.disabled=true
+  inpPly.disabled = true
 }
 
 function displayRes () {
   for (let r=0; r<9; r++) {
     if (p1.moves.has(r+1)) {
-        res[r].innerHTML = p1.name
+        res[r].style.color = p1.color
+        res[r].innerHTML = p1.name[0]
       } else if (p2.moves.has(r+1)) {
-        res[r].innerHTML = p2.name
+        res[r].style.color = p2.color
+        res[r].innerHTML = p2.name[0]
       } else {
         res[r].innerHTML = "-"
     } 
   }
 }
+
+
+
+
+
+
+
+
 
 // FOR TESTING
 function randomPlay () {

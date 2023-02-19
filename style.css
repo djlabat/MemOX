@@ -1,25 +1,35 @@
 body {
-	background-color: #444;
+	background-color: #222;
 	color: white;
-	font-size: 1.6em;
-	margin: 50px 250px;
 }
-h1 {text-align: center;}
+section.container {
+	background-color: #000000;
+	width: auto;
+}
+header {
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	background-color: #ff00e94a;
+}
+main {
+	display: flex;
+	flex-flow: column;
+	background-color: #da411366;
+	text-align: center;
+}
+footer {
+	display: flex;
+	flex-flow: column;
+	background-color: #6e424266;
+}
+
+
 label, input, button, span {
 	padding:1em 1.1em;
 	margin:0.3em;
 	line-height:2em;
 }
-#inp-play, #btn-ply, #btn-rst {
-	width:200px
-}
-
-form {text-align: center;}
-
-#game-over {padding-top: 1.5em;}
-#end-msg {color: lightslategrey}
-#winner {color: yellow;padding-bottom: 1.5ex;}
-#who-ply, #where-plyd, #winner, #end-msg, #game-over {text-align: center}
 
 .reses {
 	display: flex;
