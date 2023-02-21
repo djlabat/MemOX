@@ -14,6 +14,7 @@ const players = [p1, p2]
 // let curPlyr = p1;
 
 const whoPly = document.querySelector("#who-ply")
+const plyrName = document.querySelector(".plyr-name")
 const wherePlyd = document.querySelector("#where-plyd")
 const form = document.querySelector('#form')
 const guide = document.querySelector('#guide')
@@ -36,6 +37,7 @@ function startGame (e) {
 
   p1.moves.clear()
   p2.moves.clear()
+  plyrName.innerHTML = players[1].name
   btnPly.disabled = false
   btnPly.style.backgroundColor = "green"
   btnPly.innerHTML ="SLEDECI!"
@@ -80,10 +82,14 @@ function play (e) {
   
   // displayRes()
 
+  // FARBANJE
   mainHTML.style.backgroundColor = players[1].color + '6'
   whoPly.style.color = players[1].color
   whoPly.innerHTML = `Na potezu je ${players[1].name}`
   
+  plyrName.style.color = players[1].color
+  plyrName.innerHTML = players[1].name
+
   players.reverse()
 }
 
