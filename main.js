@@ -42,7 +42,7 @@ function startGame (e) {
   btnPly.style.backgroundColor = "green"
   btnPly.innerHTML ="SLEDECI!"
   inpPly.disabled = false
-  inpPly.value = 5
+  inpPly.value = 1
   guide.innerHTML = ''
   
   players.reverse()
@@ -67,13 +67,8 @@ function play (e) {
   e.preventDefault() 
 
   // DOUBLE PLAY CHECK
-  if (p1.moves.has(+br) || p2.moves.has(+br)) {
-    btnPly.style.backgroundColor = players[1].color
-    btnPly.innerHTML = `Pobedjuje ${players[1].name}!`
-    explain.innerHTML = `😕 "${players[0].name[0]}" gazi "${p1.moves.has(+br) ? p1.name[0] : p2.name[0]}" na polju ${br}! <br> ❌ Zabranjeno gazenje.<br> 😟 ${players[0].name} gubi partiju.`
-    players[0].moves.add(br+"!")
-    endGame(br)
-  }
+  if (p1.moves.has(+br) || p2.moves.has(+br)) {doubleEnd(br)}
+
   players[0].moves.add(+br)
   wherePlyd.innerHTML = `Poslednji potez je ${players[0].name} → ${br}`
 
@@ -92,7 +87,13 @@ function play (e) {
 
   players.reverse()
 }
-
+function doubleEnd (br) {
+  btnPly.style.backgroundColor = players[1].color
+  btnPly.innerHTML = `Pobedjuje ${players[1].name}!`
+  explain.innerHTML = `😕 "${players[0].name[0]}" gazi "${p1.moves.has(+br) ? p1.name[0] : p2.name[0]}" na polju ${br}! <br> ❌ Zabranjeno gazenje.<br> 😟 ${players[0].name} gubi partiju.`
+  players[0].moves.add(br)
+  endGame()
+}
 function winCheck(pX) {
   winCombs = [
     [1,2,3],
@@ -122,36 +123,34 @@ function drawCheck () {
   }
 }
 
-// function whoPlay () {
-//   if (players[0] == p1) {
-//     whoPly.style.color = players[1].color
-//     whoPly.innerHTML = `Na potezu je ${players[1].name}`
-//   }
-//   else {
-//     whoPly.style.color = players[0].color
-//     whoPly.innerHTML = `Na potezu je ${players[0].name}`
-//   }
-// }
-
-
-function endGame(br) {
-  displayRes()
+function endGame() {
   curScr.innerHTML = `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>
-${p2.name} je igrao na poljima: ${[...p2.moves]}`
+  ${p2.name} je igrao na poljima: ${[...p2.moves]}`
   btnPly.disabled=true
   inpPly.disabled = true
+  displayRes()
 }
 
 function displayRes () {
   for (let r=0; r<9; r++) {
-    if (p1.moves.has(r+1)) {
+    if (p1.moves.has(r+1)) { // Ako u potezima p1 ima 1,2,3,4...
+      if (/\D/.test(res[r].innerHTML)) { // ako je upisan neki NEbroj, onda stavi novo slovo pored njega.
         res[r].style.color = p1.color
-        res[r].innerHTML = p1.name[0]
-      } else if (p2.moves.has(r+1)) {
+        res[r].innerHTML += p1.name[1]  
+      } else {
+        res[r].style.color = p1.color
+        res[r].innerHTML = p1.name[0] // Upisi Prvo slovo igraca
+      }
+    } else if (p2.moves.has(r+1)) {
+      if (/\D/.test(res[r].innerHTML)) { // ako je upisan neki NEbroj, onda stavi novo slovo pored njega.
+        res[r].style.color = p2.color
+        res[r].innerHTML += p1.name[1]  
+      } else {
         res[r].style.color = p2.color
         res[r].innerHTML = p2.name[0]
-      } else {
-        res[r].innerHTML = r - -1
+      }
+    } else {
+      res[r].innerHTML = r - -1
     } 
   }
 }
