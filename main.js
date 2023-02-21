@@ -125,9 +125,10 @@ function drawCheck () {
 
 function endGame() {
   curScr.innerHTML = `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>
-  ${p2.name} je igrao na poljima: ${[...p2.moves]}`
+    ${p2.name} je igrao na poljima: ${[...p2.moves]}`
   btnPly.disabled=true
   inpPly.disabled = true
+  displayRes()
   displayRes()
 }
 
