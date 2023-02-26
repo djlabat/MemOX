@@ -1,4 +1,4 @@
-import {p1, p2, btnPly, inpPly, guide, players, mainHTML, whoPly, wherePlyd, explain, curScr, res} from "./const.mjs"
+import {p1, p2, btnPly, inpPly, guide, players, mainHTML, whoPly, wherePlyd, explain, curScr, res} from "./const.js"
 export default function startGame () {
     p1.moves.clear()
     p2.moves.clear()
@@ -6,7 +6,7 @@ export default function startGame () {
     btnPly.style.backgroundColor = "green"
     btnPly.innerHTML ="SLEDECI!"
     inpPly.disabled = false
-    inpPly.value = 5
+    // inpPly.value = 5
     guide.innerHTML = ''
     
     players.reverse()

@@ -1,4 +1,4 @@
-import {p1, p2, curScr, btnPly, inpPly} from "./const.mjs"
+import {p1, p2, curScr, btnPly, inpPly} from "./const.js"
 import displayRes from "./displayRes.js"
 export default function endGame(br) {
     displayRes()

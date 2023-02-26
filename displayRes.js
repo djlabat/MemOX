@@ -1,4 +1,4 @@
-import { p1, p2, res } from "./const.mjs";
+import { p1, p2, res } from "./const.js";
 export default function displayRes () {
     for (let r=0; r<9; r++) {
       if (p1.moves.has(r+1)) {
