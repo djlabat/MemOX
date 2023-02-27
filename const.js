@@ -2,7 +2,9 @@ export const p1 = {name: "Teodor", moves: new Set([]), color: "#0ff", robot: fal
 export const p2 = {name: "Komp", moves: new Set([]), color: "#f88", robot: true} // Comp
 export const players = [p1, p2] // players[0] is curent player
 
-// let availMoves = [1,2,3,4,5,6,7,8,9]
+export let availMoves = []
+export function availMoves_del (br) {availMoves = availMoves.filter(avm => avm!==br)}
+export function availMoves_reset () {availMoves = [1,2,3,4,5,6,7,8,9]}
 
 export const winCombs = [
     [1,2,3],

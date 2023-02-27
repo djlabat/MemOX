@@ -2,13 +2,14 @@ import displayRes from "./displayRes.js";
 import winCheck from "./winCheck.js";
 import drawCheck from "./drawCheck.js";
 import endGame from "./endGame.js";
-import { p1, p2, btnPly, explain, players, wherePlyd, mainHTML, whoPly, inpPly } from "./const.js";
+import { p1, p2, btnPly, explain, players, wherePlyd, mainHTML, whoPly, 
+  inpPly, availMoves_del, availMoves } from "./const.js";
 import AiCriticalCheck from "./AiCriticalCheck.js";
 import coloring from "./coloring.js";
 export default play
 
 function play (e) {
-  let br = Number(e.target[0].value) // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
+  let br = Number(e.q) // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
   guide.innerHTML = ""
 
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
@@ -24,6 +25,7 @@ function play (e) {
   } 
   // NORMAL PLAY
   players[0].moves.add(br)
+  availMoves_del(br)
   wherePlyd.innerHTML = `Poslednji potez je ${players[0].name} → ${br}`
   if (winCheck(players[0])) return endGame()
   if (drawCheck(players, btnPly)) return endGame()
@@ -44,7 +46,7 @@ function play (e) {
       players.reverse()
       setTimeout(displayRes, 2000)
     } else {
-      // inpPly.value = random
+      inpPly.value = availMoves[Math.ceil(Math.random()*br)]
     }
   }
 }
