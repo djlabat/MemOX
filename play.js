@@ -9,7 +9,7 @@ import coloring from "./coloring.js";
 export default play
 
 function play (e) {
-  let br = Number(e.q) // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
+  let br = Number(e.target[0].value) // BROJ KOJI SE SUBMITUJE IY FORM-INPUTA
   guide.innerHTML = ""
 
   // DA FORM-a NE BI SLALA PODATKE NA SERVAR, JER NAM TO SAD NE TREBA.
@@ -40,12 +40,13 @@ function play (e) {
   
   // ROBOT PLAY
   if (players[0].robot == true) {
-    if (AiCriticalCheck()) {
+    if (AiCriticalCheck()) { // Critical move
       players[0].moves.add(+AiCriticalCheck())
+      winCheck(players[0])
       setTimeout(coloring, 2000, players[1])
       players.reverse()
       setTimeout(displayRes, 2000)
-    } else {
+    } else { // Random move
       inpPly.value = availMoves[Math.ceil(Math.random()*br)]
     }
   }

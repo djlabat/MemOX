@@ -15,8 +15,6 @@ export default function startGame () {
     guide.innerHTML = ''
     
     players.reverse()
-    // mainHTML.style.backgroundColor = players[0].color + '6'
-    // whoPly.style.color = players[0].color
     coloring(players[0])
     whoPly.innerHTML = `Igru pocinje ${players[0].name}`
     wherePlyd.innerHTML = ''
@@ -27,4 +25,7 @@ export default function startGame () {
       res[r].style.color = "#666"
     }
     availMoves_reset()
+    if (players[0].robot == true) {
+      inpPly.value = availMoves[Math.ceil(Math.random()*9)]
+    }
   }

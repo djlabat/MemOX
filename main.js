@@ -42,38 +42,12 @@ function fixedPlay () {
   console.log(AiCriticalCheck())
   inpPly.value = String(AiCriticalCheck())
 }
-function p1Win () {
-  startGame()
-  p1.moves.add(1); p2.moves.add(5)
-  p1.moves.add(2); p2.moves.add(8)
-  inpPly.value = 3
-}
-function p2Win () {
-  play({
-    
-  })
-  inpPly.value = 7
-}
-function p1Draw () {
-  startGame()
-  p1.moves.add(5); p2.moves.add(6)
-  p1.moves.add(7); p2.moves.add(8)
-  p1.moves.add(9); p2.moves.add(1)
-  p1.moves.add(2); p2.moves.add(3)
-  inpPly.value = 4
-}
-function p2Draw () {
-  p1.moves.add(6); p2.moves.add(5)
-  p1.moves.add(8); p2.moves.add(7)
-  p1.moves.add(1); p2.moves.add(9)
-  p1.moves.add(3); p2.moves.add(2)
-  inpPly.value = 4
-}
+
 
 // START
 startGame(); displayRes()
 // p1Win(); displayRes()
-p2Win(); displayRes()
+// p2Win(); displayRes()
 // p1Draw(); displayRes()
 // p2Draw(); displayRes()
 
