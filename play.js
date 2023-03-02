@@ -4,7 +4,7 @@ import drawCheck from "./drawCheck.js";
 import endGame from "./endGame.js";
 import { p1, p2, btnPly, explain, players, wherePlyd, mainHTML, whoPly, 
   inpPly, availMoves_del, availMoves } from "./const.js";
-import AiCriticalCheck from "./AiCriticalCheck.js";
+import { AiCriticalWiningCheck, AiCriticalLosingCheck } from "./aiCheck.js";
 import coloring from "./coloring.js";
 export default play
 
@@ -36,18 +36,26 @@ function play (e) {
   inpPly.focus()
 
   displayRes() // <<<<<<<<<<<< FOR TESTING <<<<<<<<<<<<<
-  players.reverse()
+  players.reverse() // na kraju Teo poteza se odigra i ROBOT potez
   
   // ROBOT PLAY
   if (players[0].robot == true) {
-    if (AiCriticalCheck()) { // Critical move
-      players[0].moves.add(+AiCriticalCheck())
+    if (AiCriticalWiningCheck()) {
+      players[0].moves.add(+AiCriticalWiningCheck())
+        availMoves_del(br)
       winCheck(players[0])
-      setTimeout(coloring, 2000, players[1])
       players.reverse()
-      setTimeout(displayRes, 2000)
+      setTimeout(displayRes, 1000)
+
+    } else if (AiCriticalLosingCheck()) { // Critical move
+      players[0].moves.add(+AiCriticalLosingCheck())
+        availMoves_del(br)
+      winCheck(players[0])
+      setTimeout(coloring, 1000, players[1])
+      players.reverse()
+      setTimeout(displayRes, 1000)
     } else { // Random move
-      inpPly.value = availMoves[Math.ceil(Math.random()*br)]
+      inpPly.value = availMoves[Math.ceil(Math.random()*availMoves.length)]
     }
   }
 }

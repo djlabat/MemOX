@@ -5,7 +5,7 @@ import startGame from "./startGame.js"
 import shake from "./shake.js";
 import play from "./play.js";
 import displayRes from "./displayRes.js";
-import AiCriticalCheck from "./AiCriticalCheck.js";
+import {AiCriticalLosingCheck} from "./aiCheck.js";
 /* SCORE
 Skor da se upisuje u localStorage
 Responsive design BS5
@@ -39,8 +39,8 @@ function fixedPlay () {
   p1.moves.add(7)
   p2.moves.add(4)
   p1.moves.add(9)
-  console.log(AiCriticalCheck())
-  inpPly.value = String(AiCriticalCheck())
+  console.log(AiCriticalLosingCheck())
+  inpPly.value = String(AiCriticalLosingCheck())
 }
 
 
