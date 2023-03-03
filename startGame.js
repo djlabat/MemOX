@@ -1,5 +1,5 @@
 import {
-  p1, p2, btnPly, inpPly, guide, players, mainHTML, whoPly, changrFrstPly,
+  p1, p2, fp, btnPly, inpPly, guide, players, mainHTML, whoPly, changeFrstPly,
   wherePlyd, explain, curScr, res, availMoves, availMoves_del, availMoves_reset
 } from "./const.js"
 import coloring from "./coloring.js"
@@ -24,7 +24,7 @@ export default function startGame () {
     }
 
     // CHANGE PLAYER
-    changrFrstPly();
+    changeFrstPly();
     console.log(players[0])
     coloring(players[0])
     whoPly.innerHTML = `Igru pocinje ${players[0].name}`
