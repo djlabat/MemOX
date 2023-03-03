@@ -1,11 +1,11 @@
 import {
-  p1,  p2,  form,  inpPly,  btnRst, players
+  p1,  p2, form, btnRst
   } from "./const.js"
 import startGame from "./startGame.js"
 import shake from "./shake.js";
 import play from "./play.js";
 import displayRes from "./displayRes.js";
-import {AiCriticalLosingCheck} from "./aiCheck.js";
+
 /* SCORE
 Skor da se upisuje u localStorage
 Responsive design BS5
@@ -39,8 +39,6 @@ function fixedPlay () {
   p1.moves.add(7)
   p2.moves.add(4)
   p1.moves.add(9)
-  console.log(AiCriticalLosingCheck())
-  inpPly.value = String(AiCriticalLosingCheck())
 }
 
 
@@ -60,7 +58,6 @@ startGame(); displayRes()
 // Kdraw, Tdraw
 // Kgazi, Tgazi
 
-// AIcriticalCheck()
 
 
 

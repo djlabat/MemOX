@@ -3,7 +3,7 @@ import winCheck from "./winCheck.js";
 import drawCheck from "./drawCheck.js";
 import endGame from "./endGame.js";
 import { p1, p2, btnPly, explain, players, wherePlyd, mainHTML, whoPly, 
-  inpPly, availMoves_del, availMoves } from "./const.js";
+  inpPly, availMoves_del, availMoves,  } from "./const.js";
 import { AiCriticalWiningCheck, AiCriticalLosingCheck } from "./aiCheck.js";
 import coloring from "./coloring.js";
 export default play
@@ -26,11 +26,12 @@ function play (e) {
   // NORMAL PLAY
   players[0].moves.add(br)
   availMoves_del(br)
+  // console.log(availMoves)
   wherePlyd.innerHTML = `Poslednji potez je ${players[0].name} → ${br}`
   if (winCheck(players[0])) return endGame()
-  if (drawCheck(players, btnPly)) return endGame()
+  if (drawCheck()) return endGame()
   
-  // FARBANJE
+  // NEXT PLAYER PREPARE
   coloring(players[1])
   
   inpPly.focus()
@@ -42,20 +43,31 @@ function play (e) {
   if (players[0].robot == true) {
     if (AiCriticalWiningCheck()) {
       players[0].moves.add(+AiCriticalWiningCheck())
-        availMoves_del(br)
-      winCheck(players[0])
+      availMoves_del(br)
+      if (winCheck(players[0])) return endGame()
+      if (drawCheck()) return endGame()
+      coloring(players[1])
       players.reverse()
       setTimeout(displayRes, 1000)
 
     } else if (AiCriticalLosingCheck()) { // Critical move
       players[0].moves.add(+AiCriticalLosingCheck())
-        availMoves_del(br)
-      winCheck(players[0])
-      setTimeout(coloring, 1000, players[1])
+      availMoves_del(br)
+      if (winCheck(players[0])) return endGame()
+      if (drawCheck()) return endGame()
+      coloring(players[1])
       players.reverse()
       setTimeout(displayRes, 1000)
+
     } else { // Random move
-      inpPly.value = availMoves[Math.ceil(Math.random()*availMoves.length)]
+      let rnd = availMoves[Math.floor(Math.random() * availMoves.length)]
+      players[0].moves.add(rnd)
+      availMoves_del(rnd)
+      if (winCheck(players[0])) return endGame()
+      if (drawCheck()) return endGame()
+      coloring(players[1])
+      players.reverse()
+      setTimeout(displayRes, 1000)
     }
   }
 }
