@@ -1,5 +1,5 @@
 import {
-  p1,  p2, form, btnRst
+  p1,  p2, form, btnRst, players, inpPly, btnPly
   } from "./const.js"
 import startGame from "./startGame.js"
 import shake from "./shake.js";
@@ -12,38 +12,18 @@ Responsive design BS5
 resDisplay se prikazuje samo na GAME OVER.*/
 
 // AI
-// TODO: play random potez
-// NERESENO popraviti
-// AI pobeda popraviti
+// TODO: SCORE - localStorage
+// TODO: popraviti - end game poruke, na potezu, poslednji igrao, Komp- Draw
 
 // BUTTONS
 form  .addEventListener("submit", play)
 btnRst.addEventListener("click", startGame)
 
-// FOR TESTING
-function randomPlay () {
-  let arr = [1,2,3,4,5,6,7,8,9]
-  shake(arr)
-  p1.moves.add(arr.pop())
-  p2.moves.add(arr.pop())
-  p1.moves.add(arr.pop())
-  p2.moves.add(arr.pop())
-  // inpPly.value = Math.ceil(Math.random()*9)
-}
-
-function fixedPlay () {
-  p1.moves.add(1)
-  p2.moves.add(5)
-  p1.moves.add(2)
-  p2.moves.add(3)
-  p1.moves.add(7)
-  p2.moves.add(4)
-  p1.moves.add(9)
-}
 
 
 // START
-startGame(); displayRes()
+startGame(); Kwin()
+displayRes(); // <<<<<<<<<<<<<<<< TEST
 // p1Win(); displayRes()
 // p2Win(); displayRes()
 // p1Draw(); displayRes()
@@ -57,7 +37,10 @@ startGame(); displayRes()
 // Kwin, Twin
 // Kdraw, Tdraw
 // Kgazi, Tgazi
-
+function Kwin () {
+  inpPly.value = 5; btnPly.click()
+  inpPly.value = 1; btnPly.click()
+}
 
 
 

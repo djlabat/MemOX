@@ -25,13 +25,14 @@ export default function startGame () {
 
     // CHANGE PLAYER
     changeFrstPly();
-    console.log(players[0])
+    ////console.log(players[0])
     coloring(players[0])
     whoPly.innerHTML = `Igru pocinje ${players[0].name}`
     // ROBOT 1st PLAY
     if (players[0].robot == true) {
       let rnd = availMoves[Math.floor(Math.random() * availMoves.length)]
       availMoves_del(rnd)
+      wherePlyd.innerHTML = `${players[0].name} je igrao na polje ${rnd}`
       inpPly.value = rnd
       btnPly.click()
     }

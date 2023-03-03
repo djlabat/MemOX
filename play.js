@@ -27,7 +27,7 @@ function play (e) {
   players[0].moves.add(br)
   availMoves_del(br)
   // console.log(availMoves)
-  wherePlyd.innerHTML = `Poslednji potez je ${players[0].name} → ${br}`
+  //// wherePlyd.innerHTML = `Poslednji potez je ${players[0].name} → ${br}`
   if (winCheck(players[0])) return endGame()
   if (drawCheck()) return endGame()
   
@@ -36,28 +36,32 @@ function play (e) {
   
   inpPly.focus()
 
-  displayRes() // <<<<<<<<<<<< FOR TESTING <<<<<<<<<<<<<
+  //// displayRes() // <<<<<<<<<<<< FOR TESTING <<<<<<<<<<<<<
   players.reverse() // na kraju Teo poteza se odigra i ROBOT potez
   
   // ROBOT PLAY
   if (players[0].robot == true) {
-    if (AiCriticalWiningCheck()) {
-      players[0].moves.add(+AiCriticalWiningCheck())
-      availMoves_del(br)
+    let cwc = AiCriticalWiningCheck()
+    let clc = AiCriticalLosingCheck()
+    if (cwc) {
+      players[0].moves.add(+cwc)
+      availMoves_del(cwc)
       if (winCheck(players[0])) return endGame()
       if (drawCheck()) return endGame()
       coloring(players[1])
+      wherePlyd.innerHTML = `${players[0].name} je igrao na polje ${cwc}`
       players.reverse()
-      setTimeout(displayRes, 1000)
-
-    } else if (AiCriticalLosingCheck()) { // Critical move
-      players[0].moves.add(+AiCriticalLosingCheck())
-      availMoves_del(br)
+      //// setTimeout(displayRes, 1000)
+      
+    } else if (clc) { // Critical move
+      players[0].moves.add(+clc)
+      availMoves_del(+clc)
       if (winCheck(players[0])) return endGame()
       if (drawCheck()) return endGame()
       coloring(players[1])
+      wherePlyd.innerHTML = `${players[0].name} je igrao na polje ${clc}`
       players.reverse()
-      setTimeout(displayRes, 1000)
+      ////setTimeout(displayRes, 1000)
 
     } else { // Random move
       let rnd = availMoves[Math.floor(Math.random() * availMoves.length)]
@@ -66,8 +70,9 @@ function play (e) {
       if (winCheck(players[0])) return endGame()
       if (drawCheck()) return endGame()
       coloring(players[1])
+      wherePlyd.innerHTML = `${players[0].name} je igrao na polje ${rnd}`
       players.reverse()
-      setTimeout(displayRes, 1000)
+      ////setTimeout(displayRes, 1000)
     }
   }
 }
