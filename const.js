@@ -1,7 +1,7 @@
-export const p1 = {name: "Teodor", moves: new Set([]), color: "#0ff", robot: false}
+export const p1 = {name: "Teodor", moves: new Set([]), color: "#8ff", robot: false}
 export const p2 = {name: "Komp", moves: new Set([]), color: "#f88", robot: true} // Comp
-export let players = [p1, p2] // players[0] is curent player
-export let fp = [p1, p2]
+export let players = [p1, p2] // ^ players[0] is curent player - this is reversed at every play()
+export const fp = [p1, p2] // ^ fp[0] is first player - this is revesed at every startGame()
 export function changeFrstPly () { fp.reverse(); players = [...fp] }
 
 export let availMoves = [1,2,3,4,5,6,7,8,9]

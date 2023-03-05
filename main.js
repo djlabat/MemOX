@@ -4,7 +4,7 @@ import {
 import startGame from "./startGame.js"
 import shake from "./shake.js";
 import play from "./play.js";
-import displayRes from "./displayRes.js";
+import {displayRes} from "./displayRes.js";
 
 /* SCORE
 Skor da se upisuje u localStorage
@@ -22,8 +22,8 @@ btnRst.addEventListener("click", startGame)
 
 
 // START
-startGame(); Kwin()
-displayRes(); // <<<<<<<<<<<<<<<< TEST
+// startGame(); Kwin()
+// displayRes(); // <<<<<<<<<<<<<<<< TEST
 // p1Win(); displayRes()
 // p2Win(); displayRes()
 // p1Draw(); displayRes()

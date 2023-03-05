@@ -1,5 +1,5 @@
 import {p1, p2, curScr, btnPly, inpPly} from "./const.js"
-import displayRes from "./displayRes.js"
+import {displayRes} from "./displayRes.js"
 export default function endGame(br) {
     displayRes()
     curScr.innerHTML = `${p1.name} je igrao na poljima: ${[...p1.moves]} <br>

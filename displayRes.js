@@ -1,16 +1,18 @@
 import { p1, p2, res } from "./const.js";
-let subNumP1 = 0, subNumP2 = 0
-export default function displayRes () {
-    for (let r=0; r<9; r++) {
-      if (p1.moves.has(r+1)) {
-          res[r].style.color = p1.color
-          res[r].innerHTML = `${p1.name[0]}<sub>${++subNumP1}</sub>`
-        } else if (p2.moves.has(r+1)) {
-          res[r].style.color = p2.color
-          res[r].innerHTML = `${p2.name[0]}<sub>${++subNumP2}</sub>`
-        } else {
-          res[r].innerHTML = r - -1
-      } 
-    }
+export function displayRes () {
+
+  // * Potezi [ igraca ]
+  let p1mArr = [...p1.moves.values()], p2mArr = [...p2.moves.values()]
+  
+  // * Upis rezultata od p1
+  for (let i in p1mArr) {
+    res[p1mArr[i]-1].style.color = p1.color
+    res[p1mArr[i]-1].innerHTML = `${p1.name[0]}<sub>${i- -1}</sub>`
   }
-// PROBLEM JE STO NA KRAJU IGRE PONOVO RADI PISANJE subBrojeva, a u tom drugom crtanju vrednosti jos rastu.
+  
+  // * Upis rezultata od p2
+  for (let i in p2mArr) {
+    res[p2mArr[i]-1].style.color = p2.color
+    res[p2mArr[i]-1].innerHTML = `${p2.name[0]}<sub>${i- -1}</sub>`
+  }
+}

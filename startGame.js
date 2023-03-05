@@ -5,7 +5,7 @@ import {
 import coloring from "./coloring.js"
 
 export default function startGame () {
-    // RESET
+    // * RESET
     p1.moves.clear()
     p2.moves.clear()
     btnPly.disabled = false
@@ -23,12 +23,13 @@ export default function startGame () {
       res[r].style.color = "#666"
     }
 
-    // CHANGE PLAYER
+    // * CHANGE PLAYER
     changeFrstPly();
     ////console.log(players[0])
     coloring(players[0])
     whoPly.innerHTML = `Igru pocinje ${players[0].name}`
-    // ROBOT 1st PLAY
+    
+    // * ROBOT 1st PLAY
     if (players[0].robot == true) {
       let rnd = availMoves[Math.floor(Math.random() * availMoves.length)]
       availMoves_del(rnd)
