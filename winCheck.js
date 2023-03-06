@@ -8,6 +8,7 @@ function winCheck(pX) {
         btnPly.innerHTML = `POBEDJUJE ${pX.name}`
         if (pX == p1) btnPly.style.backgroundColor = p1.color
         else btnPly.style.backgroundColor = p2.color
+        localStorage.setItem(pX.name, localStorage.getItem(pX.name)- -1)
         return true
       }
     }

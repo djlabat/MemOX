@@ -19,7 +19,11 @@ resDisplay se prikazuje samo na GAME OVER.*/
 form  .addEventListener("submit", play)
 btnRst.addEventListener("click", startGame)
 
+localStorage.setItem("Teodor", p1)
+// localStorage.setItem("Lena", '{"name" : "Lena", "moves" : new Set([]), "color" : "#f88", "robot" : false}')
+// localStorage.setItem("Komp", '{"name" : "Komp", "moves" : new Set([]), "color" : "#f88", "robot" : true}')
 
+console.log(JSON.stringify(localStorage.getItem("Teodor")))
 
 // START
 // startGame(); Kwin()
