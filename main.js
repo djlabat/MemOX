@@ -6,12 +6,16 @@ import shake from "./shake.js";
 import play from "./play.js";
 import {displayRes} from "./displayRes.js";
 
-/* SCORE
-Skor da se upisuje u localStorage
-Responsive design BS5
-resDisplay se prikazuje samo na GAME OVER.*/
+// * SCORE
+// * Napraviti interfejs za pravljenje novog igraca. 
+// ^ Dodati i dugme SAVE SCORE za slanje profila igraca iz lStorage na server.
+// * Napraviti f-ju koja pravi novog igraca i upisuje ga u localStorage.
+// * Kljuc igraca u lStorage ce biti redni broj.
+// * iz localStorage se upisuje u p1 i p2 kao trenutni igraci.
+// * 
 
-// AI
+//Responsive design BS5 - Mobile first
+
 // TODO: SCORE - localStorage
 // TODO: popraviti - end game poruke, na potezu, poslednji igrao, Komp- Draw
 

@@ -15,14 +15,12 @@
 			<header class="col">
 				<h1>MemOX</h1>
 				<details>
-					<summary>Sta je "Memox" ❔</summary>
-					<p>Reč MemOX je nastala od spajanja reči "memorija" i naziva poznate igre iks-oks. Igra se na isti način kao iks-oks jedino što se ovde ne može videti tabla igre na ekranu nego se tabla mora držati u glavi, znači igra se napamet.</p>
-				</details>
-				<details>
-					<summary>Kako se igra ❔</summary>
+					<summary>Pomoć</summary>
+					<p>MemOX je igranje Iks-Oksa napamet.</p>
 					<p>Polja na kojima se igra su označena brojevima od 1 do 9.
-						Polje na koje želiš da igraš MORAŠ DA UPAMTIŠ i da broj polja uneseš u upitno polje za to.</p>
-					</details>
+						Polje na koje želiš da igraš MORAŠ DA UPAMTIŠ i da broj polja uneseš u upitno polje. Ako igraš na polje na kome je već neko igrao, gubiš partiju.</p>
+				</details>
+				
 				<button type="reset" id="btn-rst" class="btn btn-warning btn-lg">Nova partija</button><br>
 			</header>
 
@@ -32,7 +30,8 @@
 				<form id="form">
 					<p id="guide">Pritisni dugme "Nova partija"</p><br>
 					<label for="inp-play">Unesi broj polja i upamti ga</label><br>
-					<input type="number" min="1" max="9" name="inp-play" id="inp-play" disabled required onfocus="this.select();"><br>
+					<input type="number" min="1" max="9" name="inp-play" id="inp-play" 
+						disabled required onfocus="this.select();" accesskey="enter"><br>
 					<button type="submit" id="btn-ply" class="btn btn-success btn-lg" disabled>SLEDECI!</button><br>
 				</form>
 			</main>
